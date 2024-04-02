@@ -238,6 +238,16 @@ body {
             box-shadow: 0 20px 30px rgba(0, 0, 0, .06);
             transform: translateY(-10px);
           }
+          .phones__elem-favorite {
+            position: absolute;
+            width: 22px;
+            opacity: .2;
+            transition: opacity .3s;
+            cursor: pointer;
+            &:hover {
+              opacity: .6;
+            }
+          }
           .phones__elem-productImg {
             display: block;
             margin: 0 auto 20px auto;

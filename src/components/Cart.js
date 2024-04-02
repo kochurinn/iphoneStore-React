@@ -8,20 +8,20 @@ function Cart() {
             </div>
             <div className="cart__block">
                 <div className="cart__elem">
-                <img src="/img/ip15proMaxBlackTitan.webp" alt="" />
-                <div>
-                    <p>Iphone 15 Pro Max <br /> 128 гб Black</p>
-                    <span>12 999 руб.</span>
-                    <div><img src="/img/cross.svg" alt="" /></div>
-                </div>
+                    <img src="/img/ip15proMaxBlackTitan.webp" alt="" />
+                    <div>
+                        <p>Iphone 15 Pro Max <br /> 128 гб Black</p>
+                        <span>12 999 руб.</span>
+                        <div><img src="/img/cross.svg" alt="" /></div>
+                    </div>
                 </div>
                 <div className="cart__elem">
-                <img src="/img/ip15proWhite.webp" alt="" />
-                <div>
-                    <p>Iphone 15 Pro <br /> 128 гб White</p>
-                    <span>12 999 руб.</span>
-                    <div><img src="/img/cross.svg" alt="" /></div>
-                </div>
+                    <img src="/img/ip15proWhite.webp" alt="" />
+                    <div>
+                        <p>Iphone 15 Pro <br /> 128 гб White</p>
+                        <span>12 999 руб.</span>
+                        <div><img src="/img/cross.svg" alt="" /></div>
+                    </div>
                 </div>
             </div>
             <div className="cart__order">

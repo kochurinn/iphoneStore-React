@@ -39,9 +39,15 @@ function App() {
           </div>
         </div>
         <div className="phones">
-          {objCard.map(card => {
-            return <Card title={card.title} price={card.price} img={card.imgUrl} />
-          })}
+          {objCard.map(card => (
+            <Card 
+              title = {card.title} 
+              price = {card.price} 
+              imgCard = {card.imgUrl}
+              onLike = {() => {console.log('Кликнул на лайк')}}
+              onAdd = {() => {console.log('Кликнул на добавление в карзину')}}
+            />
+          ))}
         </div>
       </div>
     </div>
