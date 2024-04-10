@@ -1,35 +1,24 @@
+import React from 'react'
 import Cart from './components/Cart'
 import Header from './components/Header'
 import Card from './components/Card'
 
-const objCard = [
-  {
-    title: 'Iphone 15 Pro Max 128 гб Black',
-    price: 109000,
-    imgUrl: './img/ip15proMaxBlackTitan.webp'
-  },
-  {
-    title: 'Iphone 15 Pro 128 гб Black',
-    price: 101000,
-    imgUrl: './img/ip15proBlackTitan.webp'
-  },
-  {
-    title: 'Iphone 15 Pro 128 гб White',
-    price: 102000,
-    imgUrl: './img/ip15proWhite.webp'
-  },
-  {
-    title: 'Iphone 14 128 гб Blue',
-    price: 72000,
-    imgUrl: './img/ip14blue.webp'
-  },
-]
-
 function App() {
+  const [items, setItems] = React.useState([])
+  const [cartItems, setCartItems] = React.useState([])
+  const [openCart, setOpenCart] = React.useState(false)
+
+  React.useEffect(() => {
+    fetch('https://6616c60ced6b8fa434815662.mockapi.io/items')
+      .then((res) => res.json())
+      .then((data) => setItems(data))
+      .catch(() => {throw new Error('Ошибка')})
+  }, [])
+
   return (
     <div className="wrapper">
-      <Cart />
-      <Header />
+      {openCart && <Cart items = {cartItems} onClose = {() => {setOpenCart(false)}}/>}
+      <Header onClickCart = {() => {setOpenCart(true)}}/>
       <div className="content">
         <div className="title">
           <h1>Все смартфоны</h1>
@@ -39,7 +28,7 @@ function App() {
           </div>
         </div>
         <div className="phones">
-          {objCard.map(card => (
+          {items.map(card => (
             <Card 
               title = {card.title} 
               price = {card.price} 
