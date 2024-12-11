@@ -9,7 +9,7 @@ function Header(props) {
             </div>
             </div>
             <ul className="headerList">
-                <li onClick={props.onClickCart}>
+                <li>
                     <img src="/img/basket.svg" alt="" />
                     <span>1000 руб.</span>
                 </li>
