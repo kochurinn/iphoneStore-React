@@ -1,10 +1,10 @@
-function Cart() {
+function Cart({openCart, setOpenCart}) {
     return (
-        <div className="overlay">
+        openCart && <div className="overlay">
             <div className="cart">
                 <div className="cart__title">
                     <h2>Корзина</h2>
-                    <div><img src="/img/cross.svg" alt="" /></div>
+                    <div onClick={() => setOpenCart(!openCart)}><img src="/img/cross.svg" alt="" /></div>
                 </div>
                 <div className="cart__block">
                     <div className="cart__elem">

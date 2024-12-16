@@ -189,12 +189,14 @@ body {
           margin-left: 10px;
           span {
             margin-left: 10px;
-            cursor: pointer;
           }
           img {
             width: 25px;
             opacity: .5;
           }
+        }
+        .basket {
+          cursor: pointer;
         }
       }
     }
@@ -204,6 +206,7 @@ body {
         display: flex;
         justify-content: space-between;
         margin-bottom: 50px;
+        position: relative;
         div {
           position: relative;
           img {
@@ -221,6 +224,50 @@ body {
             font-size: 14px;
             padding-left: 47px;
             outline: none;
+          }
+        }
+        .sort {
+          position: absolute;
+          top: 15px;
+          right: 270px;
+          font-size: 13px;
+          user-select: none;
+          &-list {
+            color: #ff7800;
+            cursor: pointer;
+          }
+        }
+        .sort-block {
+          position: absolute;
+          -webkit-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.35);
+          -moz-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.35);
+          box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.35);
+          border-radius: 7px;
+          background-color: #fff;
+          right: 270px;
+          top: 42px;
+          z-index: 1;
+          display: none;
+          &__active {
+            display: block;
+          }
+          ul {
+            list-style-type: none;
+            li {
+              padding: 10px 15px;;
+              cursor: pointer;
+              transition: all .1s;
+              &.active {
+                background-color: #ffefe1;
+                color: #ff881f;
+                border-radius: 7px; 
+              }
+              &:hover {
+                background-color: #fcdec4;
+                color: #ff7700;
+                border-radius: 7px;
+              }
+            }
           }
         }
       }
