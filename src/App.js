@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from './components/Card'
 import Header from './components/Header'
+import Skeleton from './components/Card/Skeleton'
 
 function App() {
 
@@ -9,22 +10,26 @@ function App() {
   const arrSortName = ['возрастанию цены', 'убыванию цены']
   const [activeSortName, setActiveSortName] = useState(0)
   const selected = arrSortName[activeSortName]
+  const [isLoading, setIsLoading] = useState(true)
 
   const onClickSortName = (i) => {
     setActiveSortName(i)
     setOpenSort(false)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch('https://6616c60ced6b8fa434815662.mockapi.io/items')
       .then(res => res.json())
-      .then(data => setPhones(data))
+      .then(data => {
+        setPhones(data)
+        setIsLoading(false)
+      })
       .catch(() => {throw new Error('Данные не получены')})
   }, [])
 
   return (
     <div className="wrapper">
-      <Header/>
+      <Header />
       <div className="content">
         <div className="title">
           <h1>Все смартфоны</h1>
@@ -50,9 +55,7 @@ function App() {
         </div>
         <div className="phones">
           {
-            phones.map((card, i) => (
-              <Card key={i} {...card} />
-            ))
+            isLoading ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : phones.map((card, i) => <Card key={i} {...card} />)
           }
         </div>
       </div>
