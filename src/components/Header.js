@@ -26,7 +26,6 @@ function Header(props) {
                 <li><img src="/img/like.svg" alt="" /></li>
                 <li><img src="/img/account.svg" alt="" /></li>
             </ul>
-            <Basket />
         </header>
     )
 }
