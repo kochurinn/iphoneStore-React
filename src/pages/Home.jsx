@@ -7,16 +7,8 @@ import Sort from "../components/Sort"
 const Home = () => {
 
     const [phones, setPhones] = useState([])
-    
-    
-    
     const [isLoading, setIsLoading] = useState(true)
     
-
-    
-
-    
-
     useEffect(() => {
         fetch('https://6616c60ced6b8fa434815662.mockapi.io/items')
         .then(res => res.json())
