@@ -2,8 +2,8 @@ import { useState } from "react"
 
 const Sort = ({ value, onChange }) => {
 
-    const arrSortName = ['возрастанию цены', 'убыванию цены']
-    const selected = arrSortName[value]
+    const arrSortName = [['возрастанию цены', 'asc'], ['убыванию цены', 'desc']]
+    const selected = arrSortName[value][0]
     const [openSort, setOpenSort] = useState(false)
     
     return (
@@ -17,13 +17,13 @@ const Sort = ({ value, onChange }) => {
                 arrSortName.map((sortName, i) => (
                     <li
                         onClick={() => {
-                                onChange(i)
+                                onChange(i, sortName[1])
                                 setOpenSort(!openSort)
                             }
                         }
                         className={i === value ? 'active' : ''}
                     >
-                        {sortName}
+                        {sortName[0]}
                     </li>
                 ))
             }

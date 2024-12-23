@@ -1,6 +1,6 @@
 const Categories = ({ value, onChange }) => {
 
-    const сategories = ['Все', 'Iphone 15', 'Iphone 14']
+    const сategories = [['Все', null], ['Iphone 15', '15'], ['Iphone 14', '14']]
 
     return (
         <div className="сategories">
@@ -8,10 +8,10 @@ const Categories = ({ value, onChange }) => {
                 {
                     сategories.map((category, i) => (
                         <li 
-                            onClick={() => onChange(i)}
+                            onClick={() => onChange(i, category[1])}
                             className={i === value ? 'active' : ''} 
                         >
-                            {category}
+                            {category[0]}
                         </li>
                     ))
                 }
