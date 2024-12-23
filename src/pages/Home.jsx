@@ -45,13 +45,19 @@ const Home = () => {
         <>
         <div className="title">
             <h1>Все смартфоны</h1>
-            <Sort value={activeSortName} onChange={(i, sortType) => onClickSortName(i, sortType)} />
+            <Sort 
+                value={activeSortName} 
+                onChange={(i, sortType) => onClickSortName(i, sortType)} 
+            />
             <div>
                 <img src="/img/search.svg" alt="" />
                 <input type="text" placeholder="Поиск..." />
             </div>
         </div>
-        <Categories value={activeCategory} onChange={(i, categoryId) => onClickCategories(i, categoryId)}/>
+        <Categories 
+            value={activeCategory} 
+            onChange={(i, categoryId) => onClickCategories(i, categoryId)}
+        />
         <div className="phones">
         {
             isLoading ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : phones.map((card, i) => <Card key={i} {...card} />)

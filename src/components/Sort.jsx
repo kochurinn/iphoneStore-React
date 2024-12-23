@@ -16,6 +16,7 @@ const Sort = ({ value, onChange }) => {
             {
                 arrSortName.map((sortName, i) => (
                     <li
+                        key={i}
                         onClick={() => {
                                 onChange(i, sortName[1])
                                 setOpenSort(!openSort)

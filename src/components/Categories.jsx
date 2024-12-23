@@ -8,6 +8,7 @@ const Categories = ({ value, onChange }) => {
                 {
                     сategories.map((category, i) => (
                         <li 
+                            key={i}
                             onClick={() => onChange(i, category[1])}
                             className={i === value ? 'active' : ''} 
                         >
