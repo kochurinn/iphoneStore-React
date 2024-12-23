@@ -8,8 +8,14 @@ const Home = () => {
 
     const [phones, setPhones] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [activeCategory, setActiveCategory] = useState(0)
+
+    const onClickCategories = (i) => {
+        setActiveCategory(i)
+    }
     
     useEffect(() => {
+        setIsLoading(true)
         fetch('https://6616c60ced6b8fa434815662.mockapi.io/items')
         .then(res => res.json())
         .then(data => {
@@ -17,7 +23,7 @@ const Home = () => {
             setIsLoading(false)
         })
         .catch(() => {throw new Error('Данные не получены')})
-    }, [])
+    }, [activeCategory])
 
     return (
         <>
@@ -29,7 +35,7 @@ const Home = () => {
                 <input type="text" placeholder="Поиск..." />
             </div>
         </div>
-        <Categories />
+        <Categories value={activeCategory} onChange={(i) => onClickCategories(i)}/>
         <div className="phones">
         {
             isLoading ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : phones.map((card, i) => <Card key={i} {...card} />)

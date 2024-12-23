@@ -1,4 +1,3 @@
-import Basket from '../pages/Basket'
 import { Link } from "react-router-dom"
 
 function Header(props) {
