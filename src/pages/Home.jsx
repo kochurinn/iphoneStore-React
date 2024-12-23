@@ -9,9 +9,14 @@ const Home = () => {
     const [phones, setPhones] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [activeCategory, setActiveCategory] = useState(0)
+    const [activeSortName, setActiveSortName] = useState(0)
 
     const onClickCategories = (i) => {
         setActiveCategory(i)
+    }
+
+    const onClickSortName = (i) => {
+        setActiveSortName(i)
     }
     
     useEffect(() => {
@@ -23,13 +28,13 @@ const Home = () => {
             setIsLoading(false)
         })
         .catch(() => {throw new Error('Данные не получены')})
-    }, [activeCategory])
+    }, [activeCategory, activeSortName])
 
     return (
         <>
         <div className="title">
             <h1>Все смартфоны</h1>
-            <Sort />
+            <Sort value={activeSortName} onChange={(i) => onClickSortName(i)} />
             <div>
                 <img src="/img/search.svg" alt="" />
                 <input type="text" placeholder="Поиск..." />

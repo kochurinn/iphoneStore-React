@@ -1,17 +1,11 @@
 import { useState } from "react"
 
-const Sort = () => {
+const Sort = ({ value, onChange }) => {
 
-    const [activeSortName, setActiveSortName] = useState(0)
     const arrSortName = ['возрастанию цены', 'убыванию цены']
-    const selected = arrSortName[activeSortName]
+    const selected = arrSortName[value]
     const [openSort, setOpenSort] = useState(false)
-
-    const onClickSortName = (i) => {
-        setActiveSortName(i)
-        setOpenSort(false)
-    }
-
+    
     return (
         <>
         <div className='sort'>
@@ -22,8 +16,12 @@ const Sort = () => {
             {
                 arrSortName.map((sortName, i) => (
                     <li
-                        onClick={() => onClickSortName(i)}
-                        className={i === activeSortName ? 'active' : ''}
+                        onClick={() => {
+                                onChange(i)
+                                setOpenSort(!openSort)
+                            }
+                        }
+                        className={i === value ? 'active' : ''}
                     >
                         {sortName}
                     </li>
