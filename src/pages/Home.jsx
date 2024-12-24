@@ -3,6 +3,7 @@ import Card from '../components/Card'
 import Skeleton from '../components/Card/Skeleton'
 import Categories from "../components/Categories"
 import Sort from "../components/Sort"
+import Search from "../components/Search"
 
 const Home = () => {
 
@@ -12,6 +13,7 @@ const Home = () => {
     const [activeSortName, setActiveSortName] = useState(0)
     const [categoryBy, setCategoryBy] = useState(null)
     const [sortBy, setSortBy] = useState('asc')
+    const [searchValue, setSearchValue] = useState('')
 
     const onClickCategories = (i, categoryId) => {
         setActiveCategory(i)
@@ -21,6 +23,10 @@ const Home = () => {
     const onClickSortName = (i, sortType) => {
         setActiveSortName(i)
         setSortBy(sortType)
+    }
+
+    const onChangeSearch = (value) => {
+        setSearchValue(value)
     }
     
     useEffect(() => {
@@ -41,6 +47,10 @@ const Home = () => {
         .catch(() => {throw new Error('Данные не получены')})
     }, [activeCategory, activeSortName, categoryBy, sortBy])
 
+    const skeletons = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
+    const filterPhonesBySearch = phones.filter(phone => phone.title.toLowerCase().includes(searchValue.toLowerCase()))
+    const cards = filterPhonesBySearch.map((card, i) => <Card key={i} {...card} />)
+
     return (
         <>
         <div className="title">
@@ -49,10 +59,10 @@ const Home = () => {
                 value={activeSortName} 
                 onChange={onClickSortName} 
             />
-            <div>
-                <img src="/img/search.svg" alt="" />
-                <input type="text" placeholder="Поиск..." />
-            </div>
+            <Search 
+                onChangeSearch={onChangeSearch}
+                searchValue={searchValue}
+            />
         </div>
         <Categories 
             value={activeCategory} 
@@ -60,7 +70,7 @@ const Home = () => {
         />
         <div className="phones">
         {
-            isLoading ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : phones.map((card, i) => <Card key={i} {...card} />)
+            isLoading ? skeletons : cards
         }
         </div>
         </>
