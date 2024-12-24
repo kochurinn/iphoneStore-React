@@ -47,7 +47,7 @@ const Home = () => {
             <h1>Все смартфоны</h1>
             <Sort 
                 value={activeSortName} 
-                onChange={(i, sortType) => onClickSortName(i, sortType)} 
+                onChange={onClickSortName} 
             />
             <div>
                 <img src="/img/search.svg" alt="" />
@@ -56,7 +56,7 @@ const Home = () => {
         </div>
         <Categories 
             value={activeCategory} 
-            onChange={(i, categoryId) => onClickCategories(i, categoryId)}
+            onChange={onClickCategories}
         />
         <div className="phones">
         {
