@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Card from '../components/Card'
 import Skeleton from '../components/Card/Skeleton'
 import Categories from "../components/Categories"
 import Sort from "../components/Sort"
-import Search from "../components/Search"
 import Pagination from "../components/Pagination"
+import { SearchContext } from "../App"
 
 const Home = () => {
 
@@ -14,8 +14,8 @@ const Home = () => {
     const [activeSortName, setActiveSortName] = useState(0)
     const [categoryBy, setCategoryBy] = useState(null)
     const [sortBy, setSortBy] = useState('asc')
-    const [searchValue, setSearchValue] = useState('')
     const [activePage, setActivePage] = useState(0)
+    const {searchValue} = useContext(SearchContext)
 
     const onClickCategories = (i, categoryId) => {
         setActiveCategory(i)
@@ -25,10 +25,6 @@ const Home = () => {
     const onClickSortName = (i, sortType) => {
         setActiveSortName(i)
         setSortBy(sortType)
-    }
-
-    const onChangeSearch = (value) => {
-        setSearchValue(value)
     }
 
     const onChangeActivePage = (page) => {
@@ -66,10 +62,6 @@ const Home = () => {
             <Sort 
                 value={activeSortName} 
                 onChange={onClickSortName} 
-            />
-            <Search 
-                onChangeSearch={onChangeSearch}
-                searchValue={searchValue}
             />
         </div>
         <Categories 
