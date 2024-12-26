@@ -4,6 +4,7 @@ import Skeleton from '../components/Card/Skeleton'
 import Categories from "../components/Categories"
 import Sort from "../components/Sort"
 import Search from "../components/Search"
+import Pagination from "../components/Pagination"
 
 const Home = () => {
 
@@ -14,6 +15,7 @@ const Home = () => {
     const [categoryBy, setCategoryBy] = useState(null)
     const [sortBy, setSortBy] = useState('asc')
     const [searchValue, setSearchValue] = useState('')
+    const [activePage, setActivePage] = useState(0)
 
     const onClickCategories = (i, categoryId) => {
         setActiveCategory(i)
@@ -28,11 +30,17 @@ const Home = () => {
     const onChangeSearch = (value) => {
         setSearchValue(value)
     }
+
+    const onChangeActivePage = (page) => {
+        setActivePage(page)
+    }
     
     useEffect(() => {
         setIsLoading(true)
         fetch(`
             https://6616c60ced6b8fa434815662.mockapi.io/items?${
+            `page=${activePage + 1}&limit=4&`
+            }${
             categoryBy ? `category=${categoryBy}&` : ''
             }${
             sortBy ? `sortBy=price&order=${sortBy}` : ''
@@ -45,12 +53,12 @@ const Home = () => {
             console.log("Запрос выполнен")
         })
         .catch(() => {throw new Error('Данные не получены')})
-    }, [activeCategory, activeSortName, categoryBy, sortBy])
+    }, [activeCategory, activeSortName, categoryBy, sortBy, activePage])
 
     const skeletons = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
     const filterPhonesBySearch = phones.filter(phone => phone.title.toLowerCase().includes(searchValue.toLowerCase()))
     const cards = filterPhonesBySearch.map((card, i) => <Card key={i} {...card} />)
-
+    
     return (
         <>
         <div className="title">
@@ -73,6 +81,10 @@ const Home = () => {
             isLoading ? skeletons : cards
         }
         </div>
+        <Pagination 
+            onChange={onChangeActivePage}
+            value={activePage}
+        />
         </>
     )
 }
