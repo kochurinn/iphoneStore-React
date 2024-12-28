@@ -1,6 +1,11 @@
 const Categories = ({ value, onChange }) => {
 
-    const сategories = [['Все', null], ['Iphone 15', '15'], ['Iphone 14', '14']]
+    const сategories = [
+        ['Все', null], 
+        ['Iphone 16', '16'], 
+        ['Iphone 15', '15'], 
+        ['Iphone 14', '14']
+    ]
 
     return (
         <div className="сategories">
