@@ -1,18 +1,18 @@
-import React, { useState, createContext } from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header'
 import Home from './pages/Home';
 import NotFound from './pages/NotFound'
 import Basket from './pages/Basket';
-
-export const SearchContext = createContext()
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
 
 function App() {
   const [searchValue, setSearchValue] = useState('')
 
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+      <Provider store={store}>
         <Header />
         <div className="content">
           <Routes>
@@ -21,7 +21,7 @@ function App() {
             <Route path='/*' element={<NotFound />} />
           </Routes>
         </div>
-      </SearchContext.Provider>
+      </Provider>
     </div>
   );
 }
