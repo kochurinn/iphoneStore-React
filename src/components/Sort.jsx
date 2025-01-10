@@ -1,15 +1,24 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { setSortBy } from "../redux/slices/sortSlice"
 
-const Sort = ({ value, onChange }) => {
+const Sort = () => {
 
-    const arrSortName = [['возрастанию цены', 'asc'], ['убыванию цены', 'desc']]
-    const selected = arrSortName[value][0]
+    const dispatch = useDispatch()
+
+    const arrSortName = [
+        ['возрастанию цены', 'asc'], 
+        ['убыванию цены', 'desc']
+    ]
+    
     const [openSort, setOpenSort] = useState(false)
+    const [selectedSortingTypeId, setSelectedSortingTypeId] = useState(0)
+    const selectedSortingType = arrSortName[selectedSortingTypeId][0]
     
     return (
         <>
         <div className='sort'>
-                Сортировать по: <span className='sort-list' onClick={() => setOpenSort(!openSort)}>{selected}</span>
+                Сортировать по: <span className='sort-list' onClick={() => setOpenSort(!openSort)}>{selectedSortingType}</span>
         </div>
         <div className={`sort-block ${openSort ? 'sort-block__active' : ''}`}>
             <ul>
@@ -18,11 +27,12 @@ const Sort = ({ value, onChange }) => {
                     <li
                         key={i}
                         onClick={() => {
-                                onChange(i, sortName[1])
+                                dispatch(setSortBy(sortName[1]))
+                                setSelectedSortingTypeId(i)
                                 setOpenSort(!openSort)
                             }
                         }
-                        className={i === value ? 'active' : ''}
+                        className={i === selectedSortingTypeId ? 'active' : ''}
                     >
                         {sortName[0]}
                     </li>

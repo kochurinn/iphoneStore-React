@@ -4,28 +4,17 @@ import Skeleton from '../components/Card/Skeleton'
 import Categories from "../components/Categories"
 import Sort from "../components/Sort"
 import Pagination from "../components/Pagination"
-// import { SearchContext } from "../App"
+import { useSelector } from "react-redux"
 
 const Home = () => {
 
+    const activeCategoryType = useSelector((state) => state.filterSlice.categoryType)
+    const sortBy = useSelector((state) => state.sortSlice.sortBy)
+
     const [phones, setPhones] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [activeCategory, setActiveCategory] = useState(0)
-    const [activeSortName, setActiveSortName] = useState(0)
-    const [categoryBy, setCategoryBy] = useState(null)
-    const [sortBy, setSortBy] = useState('asc')
     const [activePage, setActivePage] = useState(0)
-    const searchValue = '16'
-
-    const onClickCategories = (i, categoryId) => {
-        setActiveCategory(i)
-        setCategoryBy(categoryId)
-    }
-
-    const onClickSortName = (i, sortType) => {
-        setActiveSortName(i)
-        setSortBy(sortType)
-    }
+    const searchValue = ''
 
     const onChangeActivePage = (page) => {
         setActivePage(page)
@@ -37,7 +26,7 @@ const Home = () => {
             https://6616c60ced6b8fa434815662.mockapi.io/items?${
             `page=${activePage + 1}&limit=4&`
             }${
-            categoryBy ? `category=${categoryBy}&` : ''
+            activeCategoryType ? `category=${activeCategoryType}&` : ''
             }${
             sortBy ? `sortBy=price&order=${sortBy}` : ''
             }
@@ -49,7 +38,7 @@ const Home = () => {
             console.log("Запрос выполнен")
         })
         .catch(() => {throw new Error('Данные не получены')})
-    }, [activeCategory, activeSortName, categoryBy, sortBy, activePage])
+    }, [activeCategoryType, sortBy, activePage])
 
     const skeletons = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
     const filterPhonesBySearch = phones.filter(phone => phone.title.toLowerCase().includes(searchValue.toLowerCase()))
@@ -59,15 +48,9 @@ const Home = () => {
         <>
         <div className="title">
             <h1>Все смартфоны</h1>
-            <Sort 
-                value={activeSortName} 
-                onChange={onClickSortName} 
-            />
+            <Sort />
         </div>
-        <Categories 
-            value={activeCategory} 
-            onChange={onClickCategories}
-        />
+        <Categories />
         <div className="phones">
         {
             isLoading ? skeletons : cards
