@@ -10,15 +10,11 @@ const Home = () => {
 
     const activeCategoryType = useSelector((state) => state.filterSlice.categoryType)
     const sortBy = useSelector((state) => state.sortSlice.sortBy)
+    const activePage = useSelector((state) => state.paginationSlice.activePage)
 
     const [phones, setPhones] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [activePage, setActivePage] = useState(0)
     const searchValue = ''
-
-    const onChangeActivePage = (page) => {
-        setActivePage(page)
-    }
     
     useEffect(() => {
         setIsLoading(true)
@@ -56,10 +52,7 @@ const Home = () => {
             isLoading ? skeletons : cards
         }
         </div>
-        <Pagination 
-            onChange={onChangeActivePage}
-            value={activePage}
-        />
+        <Pagination />
         </>
     )
 }

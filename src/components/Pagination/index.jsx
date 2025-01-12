@@ -1,17 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './Pagination.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { setActivePage } from '../../redux/slices/paginationSlice'
 
-export const Pagination = ({ value, onChange }) => {
+export const Pagination = () => {
+
+  const dispatch = useDispatch()
+  const activePage = useSelector((state) => state.paginationSlice.activePage)
 
   const numberOfPages = 3
 
   const switchingPages = (direction) => {
     if (direction === 'prev') {
-      return value === 0 ? '' : onChange(value - 1)
+      return activePage === 0 ? '' : dispatch(setActivePage(activePage - 1))
     }
     if (direction === 'next') {
-      return value === numberOfPages - 1 ? '' : onChange(value + 1)
+      return activePage === numberOfPages - 1 ? '' : dispatch(setActivePage(activePage + 1))
     }
   }
 
@@ -29,8 +34,8 @@ export const Pagination = ({ value, onChange }) => {
         {[...new Array(numberOfPages)].map((_, index) => (
             <li>
               <a 
-                className={index === value ? styles.active : ''}
-                onClick={() => onChange(index)}
+                className={index === activePage ? styles.active : ''}
+                onClick={() => dispatch(setActivePage(index))}
               >
                 {index + 1}
               </a>

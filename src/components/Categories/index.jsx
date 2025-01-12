@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setActiveCategoryId, setActiveCategoryType } from "../redux/slices/filterSlice"
+import { setActiveCategoryId, setActiveCategoryType } from "../../redux/slices/filterSlice"
+import styles from './Categories.module.scss'
 
 const Categories = () => {
 
@@ -14,7 +15,7 @@ const Categories = () => {
     ]
 
     return (
-        <div className="сategories">
+        <div className={styles.root}>
             <ul>
                 {
                     сategories.map((category, i) => (
@@ -24,7 +25,7 @@ const Categories = () => {
                                 dispatch(setActiveCategoryId(i))
                                 dispatch(setActiveCategoryType(category[1]))
                             }}
-                            className={i === activeCategoryId ? 'active' : ''} 
+                            className={i === activeCategoryId ? styles.active : ''} 
                         >
                             {category[0]}
                         </li>
