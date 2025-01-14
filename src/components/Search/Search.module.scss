@@ -7,14 +7,31 @@
         opacity: .1;
         top: 13px;
         left: 10px;
+    }
+    input {
+      width: 250px;
+      height: 50px;
+      border: 1px solid #f0f0f0;
+      border-radius: 15px;
+      font-size: 14px;
+      padding-left: 47px;
+      outline: none;
+    }
+    .cross {
+      display: none;
+      position: absolute;
+      top: 18px;
+      left: 220px;
+      width: 15px;
+      opacity: .3;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
       }
-      input {
-        width: 250px;
-        height: 50px;
-        border: 1px solid #f0f0f0;
-        border-radius: 15px;
-        font-size: 14px;
-        padding-left: 47px;
-        outline: none;
-      }
+    }
+
+    .active {
+      display: block
+    }
 }
+

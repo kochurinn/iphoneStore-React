@@ -18,10 +18,10 @@ const Sort = () => {
     
     return (
         <div className={styles.root}>
-            <div className='sort'>
-                Сортировать по: <span className={styles['sort-list']} onClick={() => setOpenSort(!openSort)}>{selectedSortingType}</span>
+            <div className={styles.sort}>
+                Сортировать по: <span className={styles.sortList} onClick={() => setOpenSort(!openSort)}>{selectedSortingType}</span>
             </div>
-            <div className={`${styles['sort-block']} ${openSort ? styles['sort-block--active'] : ''}`}>
+            <div className={`${styles.sortBlock} ${openSort ? styles.sortBlockActive : ''}`}>
                 <ul>
                 {
                     arrSortName.map((sortName, i) => (

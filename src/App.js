@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header'
 import Home from './pages/Home';
@@ -8,7 +8,6 @@ import { store } from './redux/store';
 import { Provider } from 'react-redux';
 
 function App() {
-  const [searchValue, setSearchValue] = useState('')
 
   return (
     <div className="wrapper">
