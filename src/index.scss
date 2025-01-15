@@ -319,10 +319,16 @@ body {
               border-radius: 5px;
               cursor: pointer;
               opacity: .2;
+              &:hover {
+                opacity: .6;
+              }
             }
-            .addCard {
+            .checkmark {
               background-color: #26851bcf;
-              opacity: 1;
+              border-radius: 10px;
+              img {
+                opacity: 1;
+              }
             }
             .phones__elem-btnActive {
               background-color: linear-gradient(0deg, #0f9d00, #00ff3c);

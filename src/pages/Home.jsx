@@ -36,7 +36,7 @@ const Home = () => {
         .catch(() => {throw new Error('Данные не получены')})
     }, [activeCategoryType, sortBy, activePage])
 
-    const updateSearchValueWithDelay = debounce(setLocalSearchValue, 250)
+    const updateSearchValueWithDelay = useCallback(debounce(setLocalSearchValue, 250), [])
 
     useEffect(() => {
         updateSearchValueWithDelay(searchValue)
