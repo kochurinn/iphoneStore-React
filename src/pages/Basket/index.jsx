@@ -2,8 +2,17 @@ import React from "react"
 import styles from "./Basket.module.scss"
 import { Link } from "react-router-dom"
 import BasketItem from "../../components/BasketItem"
+import { removeList } from "../../redux/slices/basketSlice"
+import { useDispatch } from "react-redux"
 
 const Basket = () => {
+
+    const dispatch = useDispatch()
+
+    const onClickClearList = () => {
+        dispatch(removeList())
+    }
+
     return (
         <div className={styles.basket}>
             <div className={styles.header}>
@@ -13,7 +22,7 @@ const Basket = () => {
                 </div>
                 <div className={styles.cleanBasket}>
                     <img src="img/trashcan.svg" alt="" />
-                    <span>Очистить корзину</span>
+                    <span onClick={onClickClearList}>Очистить корзину</span>
                 </div>
             </div>
             <BasketItem />

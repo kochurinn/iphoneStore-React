@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './NotFound.module.scss'
 
 function App() {
-  console.log(styles)
   return (
     <div className={styles.root}>
       <h1>Такая страница не найдена</h1>

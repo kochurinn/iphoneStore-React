@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import addProduct from "../../redux/slices/basketSlice"
+import { addProductOnMain, removeProduct } from '../../redux/slices/basketSlice'
 
-function Card({title, price, imgUrl}) {
+function Card({id, title, subtitle, price, imgUrl}) {
 
   const dispatch = useDispatch()
 
@@ -10,12 +10,21 @@ function Card({title, price, imgUrl}) {
 
   const onClickAdd = () => {
     setNumberOfAddedItems(!numberOfAddedItems)
-    
+
     const objParams = {
+      id,
       title,
-      price
+      subtitle,
+      price,
+      imgUrl
     }
-    dispatch(addProduct(objParams))
+
+    if (!numberOfAddedItems) {
+      dispatch(addProductOnMain(objParams))
+    }
+    if (numberOfAddedItems) {
+      dispatch(removeProduct(objParams))
+    }
   }
 
   return (

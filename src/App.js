@@ -14,7 +14,6 @@ function App() {
   const onClick = () => {
     if (openedSort) {
       dispatch(setOpened(!openedSort))
-      console.log('click outside')
     }
   }
 

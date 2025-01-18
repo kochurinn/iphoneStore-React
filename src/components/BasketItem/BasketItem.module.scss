@@ -13,6 +13,7 @@
         &__name {
             span {
                 display: block;
+                min-width: 350px;
                 &:first-child {
                     font-size: 1.1rem;
                     font-weight: bold;
@@ -42,6 +43,7 @@
         }
     }
     &__price {
+        min-width: 150px;
         font-size: 1.3rem;
         font-weight: bold;
     }

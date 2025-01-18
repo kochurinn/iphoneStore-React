@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom"
 import Search from "./Search/Search"
+import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
 
 function Header() {
+
+    const basketProducts = useSelector(state => state.basketSlice.products)
+
+    const [fullPrice, setFullPrice] = useState(0)
+
+    useEffect(() => {
+        if (basketProducts.length) {
+            setFullPrice(basketProducts.reduce((sum, obj) => sum + (obj.price * obj.count), 0))
+            return
+        }
+        console.log(basketProducts)
+        setFullPrice(0)   
+    }, [basketProducts])
+
     return (
         <header>
             <div className="headerLogo">
@@ -20,7 +36,7 @@ function Header() {
                         <li className="basket">
                             
                                 <img src="/img/basket.svg" alt="" />
-                                <span>0 руб.</span>
+                                <span>{fullPrice} руб.</span>
                             
                         </li>
                     </Link>
