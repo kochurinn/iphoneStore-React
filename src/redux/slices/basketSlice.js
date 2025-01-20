@@ -11,7 +11,8 @@ export const basketSlice = createSlice({
     addProductOnMain: (state, action) => {
       state.products.push({
         ...action.payload,
-        count: 1
+        count: 1,
+        added: true
       })
     },
     removeProduct: (state, action) => {

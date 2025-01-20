@@ -20,10 +20,6 @@ const BasketItem = () => {
         dispatch(minusCount(product))
     }
 
-    useEffect(() => {
-        console.log(products)
-    }, [products])
-
     return (
         <div>
             {

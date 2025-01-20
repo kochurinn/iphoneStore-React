@@ -1,12 +1,23 @@
-import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { addProductOnMain, removeProduct } from '../../redux/slices/basketSlice'
 
 function Card({id, title, subtitle, price, imgUrl}) {
 
   const dispatch = useDispatch()
+  const products = useSelector(state => state.basketSlice.products)
 
   const [numberOfAddedItems, setNumberOfAddedItems] = useState(false)
+
+  let thisProduct
+
+  useEffect(() => {
+    thisProduct = products.find(obj => obj.id === id)
+
+    if (thisProduct) {
+      console.log(thisProduct.id)
+    }
+  }, [products])
 
   const onClickAdd = () => {
     setNumberOfAddedItems(!numberOfAddedItems)

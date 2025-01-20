@@ -14,7 +14,6 @@ function Header() {
             setFullPrice(basketProducts.reduce((sum, obj) => sum + (obj.price * obj.count), 0))
             return
         }
-        console.log(basketProducts)
         setFullPrice(0)   
     }, [basketProducts])
 
