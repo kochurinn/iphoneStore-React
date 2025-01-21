@@ -15,7 +15,7 @@ function Card({id, title, subtitle, price, imgUrl}) {
     thisProduct = products.find(obj => obj.id === id)
 
     if (thisProduct) {
-      console.log(thisProduct.id)
+      setNumberOfAddedItems(thisProduct.added)
     }
   }, [products])
 
