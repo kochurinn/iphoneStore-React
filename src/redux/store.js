@@ -4,6 +4,7 @@ import sortSlice from './slices/sortSlice'
 import paginationSlice from './slices/paginationSlice'
 import searchSlice from './slices/searchSlice'
 import basketSlice from './slices/basketSlice'
+import cardsSlice from './slices/cardsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     sortSlice,
     paginationSlice,
     searchSlice,
-    basketSlice
+    basketSlice,
+    cardsSlice
   },
 })

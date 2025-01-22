@@ -4,37 +4,48 @@ import Skeleton from '../components/Card/Skeleton'
 import Categories from "../components/Categories"
 import Sort from "../components/Sort"
 import Pagination from "../components/Pagination"
-import { useSelector } from "react-redux"
-import axios from "axios"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchProducts } from '../redux/slices/cardsSlice'
 import debounce from "../utils/debounce"
 
 const Home = () => {
-
+    
+    const dispatch = useDispatch()
     const activeCategoryType = useSelector((state) => state.filterSlice.categoryType)
     const sortBy = useSelector((state) => state.sortSlice.sortBy)
     const activePage = useSelector((state) => state.paginationSlice.activePage)
     const searchValue = useSelector((state) => state.searchSlice.searchValue)
+    const { phones, status } = useSelector((state) => state.cardsSlice)
 
-    const [phones, setPhones] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
     const [localSearchValue, setLocalSearchValue] = useState('')
-    
+
+    const getProducts = () => {
+        dispatch(fetchProducts({
+            activeCategoryType,
+            sortBy,
+            activePage
+        }))
+    }
+
     useEffect(() => {
-        setIsLoading(true)
-        axios.get(`
-            https://6616c60ced6b8fa434815662.mockapi.io/items?${
-            `page=${activePage + 1}&limit=4&`
-            }${
-            activeCategoryType ? `category=${activeCategoryType}&` : ''
-            }${
-            sortBy ? `sortBy=price&order=${sortBy}` : ''
-            }`
-        ).then((res) => {
-            setPhones(res.data)
-            setIsLoading(false)
-        })
-        .catch(() => {throw new Error('Данные не получены')})
-    }, [activeCategoryType, sortBy, activePage])
+        getProducts()
+    }, [])
+    
+    // useEffect(() => {
+    //     // axios.get(`
+    //     //     https://6616c60ced6b8fa434815662.mockapi.io/items?${
+    //     //     `page=${activePage + 1}&limit=4&`
+    //     //     }${
+    //     //     activeCategoryType ? `category=${activeCategoryType}&` : ''
+    //     //     }${
+    //     //     sortBy ? `sortBy=price&order=${sortBy}` : ''
+    //     //     }`
+    //     // ).then((res) => {
+    //     //     setPhones(res.data)
+    //     //     setIsLoading(false)
+    //     // })
+    //     // .catch(() => {throw new Error('Данные не получены')})
+    // }, [activeCategoryType, sortBy, activePage])
 
     const updateSearchValueWithDelay = useCallback(debounce(setLocalSearchValue, 250), [])
 
@@ -53,11 +64,14 @@ const Home = () => {
             <Sort />
         </div>
         <Categories />
-        <div className="phones">
         {
-            isLoading ? skeletons : cards
+            status === 'error' ? (
+                <div className="phones__error">
+                    <h2>Извините, товары не найдены.</h2>
+                    <p>Скорее всего ошибка на нашей стороне и мы уже пытаемся решить вопрос.</p>
+                </div>
+            ) : <div className="phones">{status === 'loading' ? skeletons : cards}</div>
         }
-        </div>
         <Pagination />
         </>
     )

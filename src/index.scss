@@ -241,6 +241,17 @@ body {
         }
       }
 
+      .phones__error {
+        width: 550px;
+        margin: 100px auto;
+        text-align: center;
+
+        h2 {
+          font-size: 25px;
+          font-weight: bold;
+        }
+      }
+
       .phones {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
